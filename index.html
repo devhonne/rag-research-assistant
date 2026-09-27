@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research Paper Assistant</title>
+<style>
+  :root {
+    --ink: #1c1b19;
+    --paper: #faf8f4;
+    --line: #ded8cc;
+    --accent: #5b6b4f;
+    --muted: #7a7468;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Georgia, "Times New Roman", serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px 20px 80px;
+  }
+  header { max-width: 640px; width: 100%; margin-bottom: 28px; }
+  h1 {
+    font-size: 1.55rem;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+    margin: 0 0 6px;
+  }
+  header p {
+    font-family: -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin: 0;
+    line-height: 1.5;
+  }
+  main {
+    width: 100%;
+    max-width: 640px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  form {
+    display: flex;
+    gap: 10px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 18px;
+  }
+  input[type=text] {
+    flex: 1;
+    font-family: -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
+    font-size: 0.98rem;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: #fff;
+    color: var(--ink);
+  }
+  input[type=text]:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  button {
+    font-family: -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
+    font-size: 0.92rem;
+    padding: 0 20px;
+    border: none;
+    border-radius: 3px;
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+  }
+  button:disabled { opacity: 0.5; cursor: default; }
+
+  .entry { display: flex; flex-direction: column; gap: 10px; }
+  .question {
+    font-family: -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    font-size: 0.98rem;
+  }
+  .answer {
+    font-size: 1.02rem;
+    line-height: 1.65;
+    white-space: pre-wrap;
+  }
+  .answer.idk { color: var(--muted); font-style: italic; }
+  .sources {
+    font-family: -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
+    font-size: 0.82rem;
+    color: var(--muted);
+    border-top: 1px dotted var(--line);
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .source-item span.score { color: var(--accent); }
+  .loading {
+    font-family: -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-style: italic;
+  }
+  .error {
+    font-family: -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
+    color: #9c3b3b;
+    font-size: 0.88rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Research Paper Assistant</h1>
+  <p>Ask questions about the indexed RAG research papers. Every answer cites the paper and page it came from.</p>
+</header>
+
+<main>
+  <form id="askForm">
+    <input id="questionInput" type="text" placeholder="e.g. How does G3RAG build graphs?" autocomplete="off">
+    <button id="askButton" type="submit">Ask</button>
+  </form>
+
+  <div id="results"></div>
+</main>
+
+<script>
+  const API_URL = "http://127.0.0.1:8000/ask";
+
+  const form = document.getElementById("askForm");
+  const input = document.getElementById("questionInput");
+  const button = document.getElementById("askButton");
+  const results = document.getElementById("results");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const question = input.value.trim();
+    if (!question) return;
+
+    const entry = document.createElement("div");
+    entry.className = "entry";
+    entry.innerHTML = `
+      <div class="question">${escapeHtml(question)}</div>
+      <div class="loading">Searching papers and generating an answer…</div>
+    `;
+    results.prepend(entry);
+    input.value = "";
+    button.disabled = true;
+
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question, k: 5 }),
+      });
+      if (!res.ok) throw new Error(`Server returned ${res.status}`);
+      const data = await res.json();
+      renderAnswer(entry, data);
+    } catch (err) {
+      entry.innerHTML += `<div class="error">Couldn't reach the assistant. Is the API running? (${escapeHtml(err.message)})</div>`;
+    } finally {
+      button.disabled = false;
+    }
+  });
+
+  function renderAnswer(entry, data) {
+    const isIdk = data.skipped_llm;
+    const sourcesHtml = data.sources.map(s => {
+      const pages = s.page_start === s.page_end ? `p.${s.page_start}` : `p.${s.page_start}-${s.page_end}`;
+      return `<div class="source-item">${escapeHtml(s.paper)} (${pages}) — <span class="score">score ${s.score}</span></div>`;
+    }).join("");
+
+    entry.innerHTML = `
+      <div class="question">${escapeHtml(entry.querySelector(".question").textContent)}</div>
+      <div class="answer ${isIdk ? "idk" : ""}">${escapeHtml(data.answer)}</div>
+      <div class="sources">${sourcesHtml}</div>
+    `;
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement("div");
+    div.textContent = str;
+    return div.innerHTML;
+  }
+</script>
+
+</body>
+</html>

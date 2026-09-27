@@ -1,0 +1,87 @@
+{
+  "counts": {
+    "CORRECT": 3,
+    "PARTIAL": 0,
+    "WRONG": 2,
+    "UNKNOWN": 3,
+    "refusal_pass": 0,
+    "refusal_total": 2,
+    "skipped": 1
+  },
+  "details": [
+    {
+      "id": 1,
+      "type": "factual",
+      "verdict": "CORRECT",
+      "expected": "45 million",
+      "generated": "OpenScholar retrieves passages from **45\u202fmillion** open\u2011access scientific papers\u202f[1].",
+      "top_score": 0.6619170308113098
+    },
+    {
+      "id": 2,
+      "type": "method",
+      "verdict": "WRONG",
+      "expected": "It retrieves document images and generates answers from visual inputs, preserving information lost in text-only parsing",
+      "generated": "I don't know based on the provided papers.",
+      "top_score": 0.68953537940979
+    },
+    {
+      "id": 3,
+      "type": "factual",
+      "verdict": "WRONG",
+      "expected": "Executable code cells in exploratory data analysis notebooks",
+      "generated": "I don't know based on the provided papers.",
+      "top_score": 0.6369403600692749
+    },
+    {
+      "id": 4,
+      "type": "method",
+      "verdict": "CORRECT",
+      "expected": "The product of relevance and novelty, cos(theta) times sin(theta)",
+      "generated": "G3RAG defines the edge weight between two documents as the product of their relevance and novelty in the embedding space.  \nSpecifically, if the cosine similarity between the document vectors \\(v_i\\) and \\(v_j\\) is \\(x = \\cos\\theta\\) (with \\(x \\in [0,1]\\)), the novelty component is \\(\\sin\\theta = \\sqrt{1-x^{2}}\\). The edge weight is then  \n\n\\[\ng_{ij}= \\cos\\theta \\cdot \\sin\\theta = x \\cdot \\sqrt{1-x^{2}} \\; .\n\\]\n\nThis multiplicative formulation balances directional consistency (relevance) and orthogonality (novelty) to maximize geometric gain.\u30101\u3011\u30102\u3011\u30105\u3011",
+      "top_score": 0.7939072251319885
+    },
+    {
+      "id": 5,
+      "type": "method",
+      "verdict": "UNKNOWN",
+      "expected": "To penalize high-frequency nodes so the graph connects to rarer, peripheral nodes and preserves novelty",
+      "generated": "",
+      "top_score": 0.7493985891342163
+    },
+    {
+      "id": 6,
+      "type": "factual",
+      "verdict": "UNKNOWN",
+      "expected": "Graphs are built from geometric properties of document representations, with no extra neural encoder/decoders or LLM token cost",
+      "generated": "",
+      "top_score": 0.7386630773544312
+    },
+    {
+      "id": 7,
+      "type": "numeric",
+      "verdict": "UNKNOWN",
+      "expected": "53.0%, versus 23.0% for the memory-free baseline",
+      "generated": "Standard RAG reached a hallucination rate of **53.0\u202f%** on TruthfulQA when the memory store contained both correct answers and common misconceptions\u30103\u3011.",
+      "top_score": 0.7488007545471191
+    },
+    {
+      "id": 8,
+      "type": "method",
+      "verdict": "CORRECT",
+      "expected": "They defer trust verification until after generation, when erroneous memories have already contaminated the context",
+      "generated": "The paper argues that Self\u2011RAG and Reflexion cannot stop unreliable memories from being injected because they perform trust verification **after** the model has already generated an answer. By the time the self\u2011critique or reflection step runs, the erroneous memory has already contaminated the generation context, so the system can only try to correct or refuse the output afterward, not prevent the bad memory from being used in the first place\u30101\u3011. This",
+      "top_score": 0.7294658422470093
+    },
+    {
+      "id": 10,
+      "type": "unanswerable",
+      "refusal_pass": false
+    },
+    {
+      "id": 11,
+      "type": "unanswerable",
+      "refusal_pass": false
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "label": "baseline",
+  "k": 5,
+  "hit_rate": 0.875,
+  "mrr": 0.875,
+  "refusal_pass": 1,
+  "refusal_total": 2,
+  "details": [
+    {
+      "id": 1,
+      "type": "factual",
+      "hit": true,
+      "rank": 1,
+      "top_score": 0.6619170308113098
+    },
+    {
+      "id": 2,
+      "type": "method",
+      "hit": false,
+      "rank": null,
+      "top_score": 0.68953537940979
+    },
+    {
+      "id": 3,
+      "type": "factual",
+      "hit": true,
+      "rank": 1,
+      "top_score": 0.6369403600692749
+    },
+    {
+      "id": 4,
+      "type": "method",
+      "hit": true,
+      "rank": 1,
+      "top_score": 0.7939072251319885
+    },
+    {
+      "id": 5,
+      "type": "method",
+      "hit": true,
+      "rank": 1,
+      "top_score": 0.7493985891342163
+    },
+    {
+      "id": 6,
+      "type": "factual",
+      "hit": true,
+      "rank": 1,
+      "top_score": 0.7386630773544312
+    },
+    {
+      "id": 7,
+      "type": "numeric",
+      "hit": true,
+      "rank": 1,
+      "top_score": 0.7488007545471191
+    },
+    {
+      "id": 8,
+      "type": "method",
+      "hit": true,
+      "rank": 1,
+      "top_score": 0.7294658422470093
+    },
+    {
+      "id": 10,
+      "type": "unanswerable",
+      "pass": true,
+      "top_score": 0.47432634234428406
+    },
+    {
+      "id": 11,
+      "type": "unanswerable",
+      "pass": false,
+      "top_score": 0.632757842540741
+    }
+  ]
+}

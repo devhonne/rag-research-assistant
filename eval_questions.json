@@ -1,0 +1,90 @@
+[
+  {
+    "id": 1,
+    "question": "How many open-access scientific papers does OpenScholar retrieve from?",
+    "paper": "2609.19601v1",
+    "pages": [],
+    "expected_answer": "45 million",
+    "type": "factual"
+  },
+  {
+    "id": 2,
+    "question": "What is different about how VisRAG retrieves and uses documents compared with text-only parsing?",
+    "paper": "2609.19601v1",
+    "pages": [],
+    "expected_answer": "It retrieves document images and generates answers from visual inputs, preserving information lost in text-only parsing",
+    "type": "method"
+  },
+  {
+    "id": 3,
+    "question": "What does NotebookRAG treat as retrievable units?",
+    "paper": "2609.19601v1",
+    "pages": [],
+    "expected_answer": "Executable code cells in exploratory data analysis notebooks",
+    "type": "factual"
+  },
+  {
+    "id": 4,
+    "question": "How does G3RAG define the edge weight between two documents?",
+    "paper": "2609.19622v1",
+    "pages": [],
+    "expected_answer": "The product of relevance and novelty, cos(theta) times sin(theta)",
+    "type": "method"
+  },
+  {
+    "id": 5,
+    "question": "Why does G3RAG add a topological penalty to its graph?",
+    "paper": "2609.19622v1",
+    "pages": [],
+    "expected_answer": "To penalize high-frequency nodes so the graph connects to rarer, peripheral nodes and preserves novelty",
+    "type": "method"
+  },
+  {
+    "id": 6,
+    "question": "What does zero-token graph construction mean in G3RAG?",
+    "paper": "2609.19622v1",
+    "pages": [],
+    "expected_answer": "Graphs are built from geometric properties of document representations, with no extra neural encoder/decoders or LLM token cost",
+    "type": "factual"
+  },
+  {
+    "id": 7,
+    "question": "What hallucination rate did standard RAG reach on TruthfulQA when the memory held both correct answers and misconceptions?",
+    "paper": "2609.22043v1",
+    "pages": [],
+    "expected_answer": "53.0%, versus 23.0% for the memory-free baseline",
+    "type": "numeric"
+  },
+  {
+    "id": 8,
+    "question": "Why does the memory paper say Self-RAG and Reflexion cannot prevent bad memories from being used?",
+    "paper": "2609.22043v1",
+    "pages": [],
+    "expected_answer": "They defer trust verification until after generation, when erroneous memories have already contaminated the context",
+    "type": "method"
+  },
+  {
+    "id": 9,
+    "question": "Which paper proposes a trust-decision step between retrieval and generation, and which builds graphs without LLM tokens?",
+    "paper": null,
+    "pages": [],
+    "expected_answer": "2609.22043v1 proposes the trust-decision step; 2609.19622v1 (G3RAG) builds graphs without LLM tokens",
+    "type": "cross-paper"
+  },
+  {
+    "id": 10,
+    "question": "What is the capital of France?",
+    "paper": null,
+    "pages": [],
+    "expected_answer": "I don't know",
+    "type": "unanswerable"
+  },
+  {
+    "id": 11,
+    "question": "What was the author's salary while writing the G3RAG paper?",
+    "paper": null,
+    "pages": [],
+    "expected_answer": "I don't know",
+    "type": "unanswerable"
+  }
+]

@@ -1,0 +1,87 @@
+{
+  "counts": {
+    "CORRECT": 0,
+    "PARTIAL": 0,
+    "WRONG": 0,
+    "UNKNOWN": 8,
+    "refusal_pass": 0,
+    "refusal_total": 2,
+    "skipped": 1
+  },
+  "details": [
+    {
+      "id": 1,
+      "type": "factual",
+      "verdict": "UNKNOWN",
+      "expected": "45 million",
+      "generated": "OpenScholar retrieves passages from **45\u202fmillion** open\u2011access scientific papers\u30101\u3011.",
+      "top_score": 0.6619170308113098
+    },
+    {
+      "id": 2,
+      "type": "method",
+      "verdict": "UNKNOWN",
+      "expected": "It retrieves document images and generates answers from visual inputs, preserving information lost in text-only parsing",
+      "generated": "I don't know based on the provided papers.",
+      "top_score": 0.68953537940979
+    },
+    {
+      "id": 3,
+      "type": "factual",
+      "verdict": "UNKNOWN",
+      "expected": "Executable code cells in exploratory data analysis notebooks",
+      "generated": "I don't know based on the provided papers.",
+      "top_score": 0.6369403600692749
+    },
+    {
+      "id": 4,
+      "type": "method",
+      "verdict": "UNKNOWN",
+      "expected": "The product of relevance and novelty, cos(theta) times sin(theta)",
+      "generated": "G3RAG defines the edge weight between two documents as the product of their relevance and novelty, i.e., the cosine similarity multiplied by the sine of the angle between their vector representations:  \n\n\\[\nw_{ij}= \\cos\\theta \\;\\cdot\\; \\sin\\theta \\;=\\; x \\;\\cdot\\; \\sqrt{1-x^{2}},\n\\]\n\nwhere \\(x=\\cos\\theta\\) is the cosine similarity between the two document vectors. This multiplicative formulation balances directional consistency (relevance) with orthogonality (novelty) in the graph construction.\u30102\u3011\u30105\u3011",
+      "top_score": 0.7939072251319885
+    },
+    {
+      "id": 5,
+      "type": "method",
+      "verdict": "UNKNOWN",
+      "expected": "To penalize high-frequency nodes so the graph connects to rarer, peripheral nodes and preserves novelty",
+      "generated": "G3RAG adds a topological penalty to its graph construction to counteract the \u201csimilarity\u2011trap\u201d that arises when many documents are densely clustered around a few highly similar nodes.  \n- The penalty is applied to the target node\u2019s density estimate (\u03c1j) and exponentially decays the initial symmetric geometric weight, turning it into a directed, asymmetric transition weight (wij \u2260 wji). This forces the diffusion process to bypass redundant central hubs and instead radiate toward peripheral nodes that offer higher information gain\u30102\u3011.  \n- Empirically, removing the penalty module causes a noticeable drop in performance on multi\u2011hop QA datasets (e.g., MuSiQue), indicating that without the penalty the retrieval chain tends to stay in dense, redundant regions and fails to reach the unique answer document\u30103\u3011.",
+      "top_score": 0.7493985891342163
+    },
+    {
+      "id": 6,
+      "type": "factual",
+      "verdict": "UNKNOWN",
+      "expected": "Graphs are built from geometric properties of document representations, with no extra neural encoder/decoders or LLM token cost",
+      "generated": "Zero\u2011token graph construction in G3RAG means building the knowledge\u2011graph entirely without invoking any language\u2011model tokens.  Instead of extracting entities or relations with an LLM (which would consume tokens and incur cost), G3RAG computes edge weights solely from the geometric properties of document embeddings\u2014specifically the product of relevance (cos\u202f\u03b8) and novelty (sin\u202f\u03b8)\u2014and applies a topological penalty to discourage hub nodes.  This approach eliminates the need for extra neural encoders/decoders, resulting in no token usage during graph construction and only the embedding model\u2019s memory overhead [1],",
+      "top_score": 0.7386630773544312
+    },
+    {
+      "id": 7,
+      "type": "numeric",
+      "verdict": "UNKNOWN",
+      "expected": "53.0%, versus 23.0% for the memory-free baseline",
+      "generated": "Standard RAG reached a hallucination rate of **53.0\u202f%** on TruthfulQA when the memory store contained both correct answers and common misconceptions\u30103\u3011.",
+      "top_score": 0.7488007545471191
+    },
+    {
+      "id": 8,
+      "type": "method",
+      "verdict": "UNKNOWN",
+      "expected": "They defer trust verification until after generation, when erroneous memories have already contaminated the context",
+      "generated": "",
+      "top_score": 0.7294658422470093
+    },
+    {
+      "id": 10,
+      "type": "unanswerable",
+      "refusal_pass": false
+    },
+    {
+      "id": 11,
+      "type": "unanswerable",
+      "refusal_pass": false
+    }
+  ]
+}

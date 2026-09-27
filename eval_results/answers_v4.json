@@ -1,0 +1,87 @@
+{
+  "counts": {
+    "CORRECT": 3,
+    "PARTIAL": 1,
+    "WRONG": 4,
+    "UNKNOWN": 0,
+    "refusal_pass": 0,
+    "refusal_total": 2,
+    "skipped": 1
+  },
+  "details": [
+    {
+      "id": 1,
+      "type": "factual",
+      "verdict": "CORRECT",
+      "expected": "45 million",
+      "generated": "OpenScholar retrieves passages from **45\u202fmillion** open\u2011access scientific papers to generate citation\u2011backed answers\u30101\u3011.",
+      "top_score": 0.6619170308113098
+    },
+    {
+      "id": 2,
+      "type": "method",
+      "verdict": "WRONG",
+      "expected": "It retrieves document images and generates answers from visual inputs, preserving information lost in text-only parsing",
+      "generated": "I don't know based on the provided papers.",
+      "top_score": 0.68953537940979
+    },
+    {
+      "id": 3,
+      "type": "factual",
+      "verdict": "WRONG",
+      "expected": "Executable code cells in exploratory data analysis notebooks",
+      "generated": "I don't know based on the provided papers.",
+      "top_score": 0.6369403600692749
+    },
+    {
+      "id": 4,
+      "type": "method",
+      "verdict": "CORRECT",
+      "expected": "The product of relevance and novelty, cos(theta) times sin(theta)",
+      "generated": "G3RAG defines the edge weight between two documents as the product of their relevance and novelty in the embedding space.  \nSpecifically, if the cosine similarity between the document vectors \\(v_i\\) and \\(v_j\\) is \\(x = \\cos\\theta\\) (with \\(x \\in [0,1]\\)), the novelty component is \\(\\sin\\theta = \\sqrt{1-x^{2}}\\). The edge weight is then  \n\n\\[\ng_{ij}= \\cos\\theta \\cdot \\sin\\theta = x \\cdot \\sqrt{1-x^{2}} \\quad\\text{(Equation\u202f4)} \\tag{4}\n\\]\n\nThis multiplicative formulation balances directional consistency (relevance) and orthogonality (novelty) to maximize geometric gain.\u30101\u3011\u30102\u3011\u30105\u3011",
+      "top_score": 0.7939072251319885
+    },
+    {
+      "id": 5,
+      "type": "method",
+      "verdict": "WRONG",
+      "expected": "To penalize high-frequency nodes so the graph connects to rarer, peripheral nodes and preserves novelty",
+      "generated": "",
+      "top_score": 0.7493985891342163
+    },
+    {
+      "id": 6,
+      "type": "factual",
+      "verdict": "CORRECT",
+      "expected": "Graphs are built from geometric properties of document representations, with no extra neural encoder/decoders or LLM token cost",
+      "generated": "Zero\u2011token graph construction in G3RAG means building the knowledge\u2011graph solely from the geometric properties of document embeddings\u2014specifically the cosine similarity (relevance) and sine of the angle (novelty)\u2014without invoking any large language model (LLM) or additional neural encoder/decoder during the offline graph\u2011building phase. As a result, the construction process consumes no LLM tokens and requires only the embedding model, yielding a \u201czero\u2011token\u201d overhead\u30101\u3011, and eliminates the need for extra neural encoders/decoders, thereby achieving a truly zero\u2011token graph construction paradigm\u30104\u3011\u30105\u3011.",
+      "top_score": 0.7386630773544312
+    },
+    {
+      "id": 7,
+      "type": "numeric",
+      "verdict": "PARTIAL",
+      "expected": "53.0%, versus 23.0% for the memory-free baseline",
+      "generated": "The standard RAG model reached a hallucination rate of **53.0\u202f%** on TruthfulQA when the memory store contained both correct answers and common misconceptions\u30103\u3011.",
+      "top_score": 0.7488007545471191
+    },
+    {
+      "id": 8,
+      "type": "method",
+      "verdict": "WRONG",
+      "expected": "They defer trust verification until after generation, when erroneous memories have already contaminated the context",
+      "generated": "",
+      "top_score": 0.7294658422470093
+    },
+    {
+      "id": 10,
+      "type": "unanswerable",
+      "refusal_pass": false
+    },
+    {
+      "id": 11,
+      "type": "unanswerable",
+      "refusal_pass": false
+    }
+  ]
+}

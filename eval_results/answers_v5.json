@@ -1,0 +1,87 @@
+{
+  "counts": {
+    "CORRECT": 5,
+    "PARTIAL": 1,
+    "WRONG": 2,
+    "UNKNOWN": 0,
+    "refusal_pass": 0,
+    "refusal_total": 2,
+    "skipped": 1
+  },
+  "details": [
+    {
+      "id": 1,
+      "type": "factual",
+      "verdict": "CORRECT",
+      "expected": "45 million",
+      "generated": "OpenScholar retrieves passages from **45\u202fmillion** open\u2011access scientific papers\u30101\u3011.",
+      "top_score": 0.6619170308113098
+    },
+    {
+      "id": 2,
+      "type": "method",
+      "verdict": "WRONG",
+      "expected": "It retrieves document images and generates answers from visual inputs, preserving information lost in text-only parsing",
+      "generated": "I don't know based on the provided papers.",
+      "top_score": 0.68953537940979
+    },
+    {
+      "id": 3,
+      "type": "factual",
+      "verdict": "WRONG",
+      "expected": "Executable code cells in exploratory data analysis notebooks",
+      "generated": "I don't know based on the provided papers.",
+      "top_score": 0.6369403600692749
+    },
+    {
+      "id": 4,
+      "type": "method",
+      "verdict": "CORRECT",
+      "expected": "The product of relevance and novelty, cos(theta) times sin(theta)",
+      "generated": "G3RAG defines the edge weight between two documents \\(v_i\\) and \\(v_j\\) as the product of their relevance (cosine similarity) and novelty (orthogonal component), i.e.,  \n\n\\[\nw_{ij}= \\cos\\theta \\;\\cdot\\; \\sin\\theta \\;=\\; x \\;\\cdot\\; \\sqrt{1-x^{2}},\n\\]\n\nwhere \\(x=\\cos\\theta\\) is the cosine similarity between the two document vectors. This formulation balances directional consistency (relevance) with orthogonality (novelty) to maximize geometric gain\u30105\u3011\u30102\u3011.",
+      "top_score": 0.7939072251319885
+    },
+    {
+      "id": 5,
+      "type": "method",
+      "verdict": "CORRECT",
+      "expected": "To penalize high-frequency nodes so the graph connects to rarer, peripheral nodes and preserves novelty",
+      "generated": "G3RAG adds a topological penalty to its graph construction in order to mitigate the \u201csimilarity trap\u201d that arises when highly similar (dense) nodes dominate the topology and cause retrieval chains to get stuck in redundant hubs. By computing a global redundancy estimate \\( \\rho_j \\) for each target node and applying an exponential decay \\( \\exp(-\\beta \\rho_j) \\) to the initial symmetric edge weight, the penalty turns the weights into directed, asymmetric transitions that actively bypass dense, redundant central hubs and instead radiate outward toward peripheral nodes that provide higher information gain. This mechanism enforces strict topological constraints, improves node differentiation, and prevents the diffusion process from being absorbed by topological echo chambers, thereby enhancing multi\u2011hop evidence retrieval\u30102\u3011.",
+      "top_score": 0.7493985891342163
+    },
+    {
+      "id": 6,
+      "type": "factual",
+      "verdict": "CORRECT",
+      "expected": "Graphs are built from geometric properties of document representations, with no extra neural encoder/decoders or LLM token cost",
+      "generated": "Zero\u2011token graph construction in G3RAG means that the entire graph of document nodes is built **without consuming any LLM tokens or running any additional neural encoder/decoder models**. The edge weights are computed purely from the geometric properties (cos\u202f\u03b8\u202f\u00b7\u202fsin\u202f\u03b8) of the pre\u2011computed document embeddings, and a topological penalty is applied to suppress high\u2011frequency hubs. As a result, the construction phase requires no LLM inference and incurs no token\u2011based cost, achieving a \u201czero\u2011token\u201d construction paradigm\u30101\u3011,\u30104\u3011,\u30105\u3011.",
+      "top_score": 0.7386630773544312
+    },
+    {
+      "id": 7,
+      "type": "numeric",
+      "verdict": "PARTIAL",
+      "expected": "53.0%, versus 23.0% for the memory-free baseline",
+      "generated": "The standard RAG system reached a hallucination rate of **53.0\u202f%** on TruthfulQA when the memory store contained both correct answers and common misconceptions\u30103\u3011.",
+      "top_score": 0.7488007545471191
+    },
+    {
+      "id": 8,
+      "type": "method",
+      "verdict": "CORRECT",
+      "expected": "They defer trust verification until after generation, when erroneous memories have already contaminated the context",
+      "generated": "The paper argues that Self\u2011RAG and Reflexion defer trust verification until **after** the retrieved memory has already been injected into the generation context. Because the erroneous memory is already present in the prompt, the model can be misled before any self\u2011evaluation occurs, and the subsequent self\u2011critique can only remediate rather than prevent the contamination. This is why the paper states that \u201cpost\u2011generation verification alone therefore cannot fundamentally stop erroneous memories from being injected\u201d and that \u201cSelf\u2011assessment approaches such as Self\u2011RAG [9] and Reflexion [5] defer trust verification until after generation, by which time erroneous memories have already contaminated the context and can only be remedied, not prevented\u201d\u30101\u2020L1-L4\u3011\u30104\u2020L1-L4\u3011",
+      "top_score": 0.7294658422470093
+    },
+    {
+      "id": 10,
+      "type": "unanswerable",
+      "refusal_pass": false
+    },
+    {
+      "id": 11,
+      "type": "unanswerable",
+      "refusal_pass": false
+    }
+  ]
+}
